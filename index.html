@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raffa Lost In Tambun - Profil Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a2a, #1a1a3a, #2a2a4a);
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Efek salju di latar belakang */
+        .snow-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: rgba(10, 10, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            margin: 20px 0;
+            border: 1px solid rgba(100, 100, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid transparent;
+            background: linear-gradient(45deg, #1e40af, #3b82f6, #60a5fa) border-box;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            margin: 0 auto 20px;
+            padding: 5px;
+        }
+
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #3b82f6, #60a5fa, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .profile-description {
+            font-size: 1.2rem;
+            color: #d1d5db;
+            margin-bottom: 25px;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #3b82f6, transparent);
+            margin: 25px 0;
+        }
+
+        .links-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .link-card {
+            background: rgba(30, 30, 50, 0.6);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(100, 100, 255, 0.2);
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            background: rgba(40, 40, 70, 0.7);
+        }
+
+        .link-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #3b82f6;
+        }
+
+        .link-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #93c5fd;
+        }
+
+        .link-value {
+            font-size: 1rem;
+            color: #d1d5db;
+            word-break: break-all;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #1e40af, #3b82f6);
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #93c5fd;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsivitas untuk mobile */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .profile-name {
+                font-size: 2rem;
+            }
+            
+            .profile-description {
+                font-size: 1rem;
+            }
+            
+            .links-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-links {
+                flex-wrap: wrap;
+            }
+        }
+
+        /* Animasi */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            animation: fadeIn 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="snow-background" id="snow-background"></div>
+    
+    <div class="container">
+        <div class="profile-header">
+            <img src="https://photos.app.goo.gl/HBPu8fHFQBUDrLQR7" alt="Raffa Lost In Tambun" class="profile-image">
+            <h1 class="profile-name">Raffa Lost In Tambun</h1>
+            <p class="profile-description">Kreator Digital, Web Developer</p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="links-section">
+            <div class="link-card">
+                <div class="link-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <h3 class="link-title">Telepon</h3>
+                <p class="link-value">0877-7211-3357</p>
+            </div>
+            
+            <div class="link-card">
+                <div class="link-icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <h3 class="link-title">Instagram</h3>
+                <p class="link-value">@rapa.28apr_</p>
+            </div>
+        </div>
+        
+        <div class="social-links">
+            <a href="tel:087772113357" class="social-icon">
+                <i class="fas fa-phone"></i>
+            </a>
+            <a href="https://www.instagram.com/rapa.28apr_/#" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Raffa. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Fungsi untuk membuat efek salju
+        function createSnow() {
+            const snowContainer = document.getElementById('snow-background');
+            const screenWidth = window.innerWidth;
+            const snowflakeCount = Math.floor(screenWidth / 10); // Jumlah salju berdasarkan lebar layar
+            
+            for (let i = 0; i < snowflakeCount; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                
+                // Ukuran acak antara 2-6px
+                const size = Math.random() * 4 + 2;
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                
+                // Posisi acak di seluruh layar
+                snowflake.style.left = `${Math.random() * 100}%`;
+                snowflake.style.top = `${Math.random() * 100}%`;
+                
+                // Kecepatan jatuh acak (5-15 detik)
+                const duration = Math.random() * 10 + 5;
+                snowflake.style.animationDuration = `${duration}s`;
+                
+                // Opacity acak
+                snowflake.style.opacity = Math.random() * 0.6 + 0.2;
+                
+                snowContainer.appendChild(snowflake);
+            }
+        }
+        
+        // Panggil fungsi saat halaman dimuat
+        window.addEventListener('load', createSnow);
+        
+        // Buat ulang salju saat ukuran jendela berubah
+        window.addEventListener('resize', function() {
+            const snowContainer = document.getElementById('snow-background');
+            snowContainer.innerHTML = '';
+            createSnow();
+        });
+    </script>
+</body>
+</html>
